@@ -1,6 +1,8 @@
 // start server
 
-const dotenv = require("dotenv");
+if(process.env.DB_URI !== 'production'){
+  require('dotenv').config()
+}
 
 // load root .env (if present) then fallback to src/models/.env
 dotenv.config();
