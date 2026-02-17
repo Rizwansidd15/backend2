@@ -1,6 +1,6 @@
 // start server
 
-const dotenv = require("dotenv");
+// const dotenv = require("dotenv");
 
 // load root .env (if present) then fallback to src/models/.env
 dotenv.config();
