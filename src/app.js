@@ -7,7 +7,7 @@ const authRoutes = require("./routes/auth.route");
 const foodRoutes = require('./routes/food.route')
 const cors = require('cors')
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: 'https://frontend-nu-orcin-43.vercel.app/',
     credentials: true,
 }));
 app.use(express.json());
