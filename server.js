@@ -1,9 +1,7 @@
 // start server
 
-if(process.env.DB_URI !== 'production'){
-  require('dotenv').config()
-}
-
+const dotenv = require('dotenv')
+dotenv.config()
 // load root .env (if present) then fallback to src/models/.env
 dotenv.config();
 if (!process.env.IMAGEKIT_PUBLIC_KEY) {
