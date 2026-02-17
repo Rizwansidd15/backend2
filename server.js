@@ -5,7 +5,7 @@ const dotenv = require("dotenv");
 // load root .env (if present) then fallback to src/models/.env
 dotenv.config();
 if (!process.env.IMAGEKIT_PUBLIC_KEY) {
-  dotenv.config({ path: __dirname + "/src/models/.env" });
+  dotenv.config({ path: __dirname + "/src/.env" });
 }
 const app = require("./src/app");
 const connectDB = require("./src/db/db");
