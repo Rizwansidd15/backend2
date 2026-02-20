@@ -33,7 +33,12 @@ async function registerUser(req, res) {
     process.env.JWT_SECRET,
   );
 
-  res.cookie("token", token);
+  res.cookie("token", token, {
+    httpOnly: true,
+    sameSite: "none",
+    secure: true,
+    maxAge: 7 * 24 * 60 * 60 * 1000,
+  });
 
   res.status(201).json({
     messege: "User registered successfully",
@@ -73,7 +78,12 @@ async function loginUser(req, res) {
     process.env.JWT_SECRET,
   );
 
-  res.cookie("token", token);
+  res.cookie("token", token, {
+    httpOnly: true,
+    sameSite: "none",
+    secure: true,
+    maxAge: 7 * 24 * 60 * 60 * 1000,
+  });
 
   res.status(200).json({
     messege: "User logged in successfully",
@@ -86,7 +96,7 @@ async function loginUser(req, res) {
 }
 
 async function logoutUser(req, res) {
-  res.clearCookie("token");
+  res.clearCookie("token", { httpOnly: true, sameSite: "none", secure: true });
   res.status(200).json({
     messege: "User logged out successfully",
   });
@@ -130,7 +140,12 @@ async function registerFoodPartner(req, res) {
     process.env.JWT_SECRET,
   );
 
-  res.cookie("token", token);
+  res.cookie("token", token, {
+    httpOnly: true,
+    sameSite: "none",
+    secure: true,
+    maxAge: 7 * 24 * 60 * 60 * 1000,
+  });
 
   res.status(201).json({
     messege: "Food partner registered successfully",
@@ -172,7 +187,12 @@ async function loginFoodPartner(req, res) {
     process.env.JWT_SECRET,
   );
 
-  res.cookie("token", token);
+  res.cookie("token", token, {
+    httpOnly: true,
+    sameSite: "none",
+    secure: true,
+    maxAge: 7 * 24 * 60 * 60 * 1000,
+  });
 
   res.status(200).json({
     messege: "Food partner logged in successfully",
@@ -185,7 +205,7 @@ async function loginFoodPartner(req, res) {
 }
 
 async function logoutFoodPartner(req, res) {
-  res.clearCookie("token");
+  res.clearCookie("token", { httpOnly: true, sameSite: "none", secure: true });
   res.status(200).json({
     messege: "food partner logged out successfully",
   });
@@ -221,12 +241,10 @@ async function uploadPartnerAvatar(req, res) {
       { uploadProfilePicture: uploadRes.url },
       { new: true },
     );
-    res
-      .status(200)
-      .json({
-        messege: "avatar uploaded",
-        uploadProfilePicture: updated.uploadProfilePicture,
-      });
+    res.status(200).json({
+      messege: "avatar uploaded",
+      uploadProfilePicture: updated.uploadProfilePicture,
+    });
   } catch (err) {
     console.error(err);
     res.status(500).json({ messege: "failed to upload avatar" });
