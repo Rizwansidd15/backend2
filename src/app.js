@@ -7,10 +7,10 @@ const authRoutes = require("./routes/auth.route");
 const foodRoutes = require("./routes/food.route");
 const cors = require("cors");
 const allowedOrigins = [
-  "https://frontend-nu-orcin-43.vercel.app",
+  process.env.FRONTEND_URL || "https://frontend-nu-orcin-43.vercel.app",
   "http://localhost:5173",
   "http://127.0.0.1:5173",
-  "http://localhost:3000"
+  "http://localhost:3000",
 ];
 
 app.use(
@@ -18,10 +18,10 @@ app.use(
     origin: function (origin, callback) {
       if (!origin) return callback(null, true);
       if (allowedOrigins.indexOf(origin) !== -1) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
+        return callback(null, true);
       }
+      console.warn("Blocked CORS request from origin:", origin);
+      return callback(new Error("Not allowed by CORS"));
     },
     credentials: true,
   }),
